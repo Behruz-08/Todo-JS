@@ -1,4 +1,4 @@
-//selecting dom elements for manipulation
+//выбор элементов dom для манипуляций
 const input = document.querySelector("input[type = 'text']");
 const ul = document.querySelector("ul");
 const container = document.querySelector("div");
@@ -12,7 +12,7 @@ const closeBtn = document.querySelector(".closeBtn");
 const overlay = document.getElementById("overlay")
 
 
-//function to delete todo if delete span is clicked.
+//функция для удаления задачи при нажатии кнопки
 function deleteTodo(){
   for(let span of spans){
     span.addEventListener ("click",function (){
@@ -22,7 +22,7 @@ function deleteTodo(){
   }
 }
 
-//function to load todo if list is found in local storage.
+//функция для загрузки списка дел, если список найден в локальном хранилище
 function loadTodo(){
   if(localStorage.getItem('todoList')){
     ul.innerHTML = localStorage.getItem('todoList');
@@ -30,7 +30,7 @@ function loadTodo(){
   }
 }
 
-//event listener for input to add new todo to the list.
+//прослушиватель событий для ввода, чтобы добавить новую задачу в список.
 input.addEventListener("keypress",function(keyPressed){
   if(keyPressed.which === 13){
     //creating lists and span when enter is clicked
@@ -51,7 +51,7 @@ input.addEventListener("keypress",function(keyPressed){
     
 });
 
-// event listener to linethrough list if clicked
+//прослушиватель событий для сквозного списка при нажатии
 ul.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       ev.target.classList.toggle('checked');
@@ -59,39 +59,39 @@ ul.addEventListener('click', function(ev) {
   },false
 );
 
-//hide input box,when pencil icon is clicked
+//скрываем поле ввода при нажатии на значок карандаша
 pencil.addEventListener('click', function(){
   input.classList.toggle('display');
 });
 
 
 
-//save todolist state so user can access it later
+//сохранить состояние списка задач, чтобы пользователь мог получить к нему доступ позже
 saveBtn.addEventListener('click',function(){
   localStorage.setItem('todoList',ul.innerHTML );
   
 });
 
-//clear all todo when clear button is clicked
+//очистить все задачи при нажатии кнопки «Очистить»
 clearBtn.addEventListener('click', function(){
   ul.innerHTML= "";
   localStorage.removeItem('todoList',ul.innerHTML );
 });
 
-//display overlay when tips btn is clicked
+//отображение наложения при нажатии кнопки подсказок
 tipsBtn.addEventListener("click",function(){
    overlay.style.height = "100%";
 });
 
-//close overlay when close btn is clicked
+//закрыть наложение при нажатии кнопки закрытия
 closeBtn.addEventListener("click",function(e){
   e.preventDefault;
   overlay.style.height = "0";
   
 })
 
-//delete todo
+//удалить задачу
 deleteTodo();
 
-//load Todo
+//загрузить список задач
 loadTodo();
